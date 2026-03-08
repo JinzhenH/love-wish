@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 亲爱的，节日快乐 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #e91e63;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .heart-container {
+            font-size: 80px;
+            margin: 30px 0;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .heart-container:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
+        /* 照片墙样式 */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 20px;
+        }
+
+        .photo-item {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            position: relative;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.4);
+            z-index: 5;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-item .placeholder {
+            font-size: 40px;
+        }
+
+        /* 打字机效果 */
+        .typewriter {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .typewriter::before {
+            content: '💌';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 100px;
+            opacity: 0.1;
+        }
+
+        .typewriter-text {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 2;
+            min-height: 200px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: #e91e63;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .highlight {
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        /* 按钮样式 */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 漂浮爱心 */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 6s ease-in infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 倒计时卡片 */
+        .countdown {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(233, 30, 99, 0.2);
+        }
+
+        .countdown-title {
+            color: #e91e63;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .countdown-numbers {
+            font-size: 3em;
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        /* 时光轴 */
+        .timeline {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: left;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            bottom: 50px;
+            width: 3px;
+            background: linear-gradient(to bottom, #e91e63, #ff4081);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            margin-right: 40px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(233, 30, 99, 0.5);
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: rgba(233, 30, 99, 0.1);
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #e91e63;
+        }
+
+        .timeline-date {
+            color: #e91e63;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .timeline-text {
+            color: #333;
+            margin-top: 5px;
+        }
+
+        /* 留言板 */
+        .message-board {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
+        }
+
+        .message-board h3 {
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+
+        .message-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #fcb69f;
+            border-radius: 10px;
+            font-size: 1em;
+            margin-bottom: 15px;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #e91e63;
+        }
+
+        .messages-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .message-item {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        .message-item .time {
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        /* 烟花画布 */
+        #fireworksCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* 音乐控制 */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+            z-index: 1000;
+            animation: rotate 3s linear infinite;
+        }
+
+        .music-control.paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 页脚 */
+        footer {
+            margin-top: 50px;
+            color: #e91e63;
+            font-size: 0.9em;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8em; }
+            .countdown-numbers { font-size: 2em; }
+            .timeline::before { left: 30px; }
+            .timeline-dot { margin-right: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="fireworksCanvas"></canvas>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <button class="music-control" id="musicBtn" onclick="toggleMusic()">🎵</button>
+
+    <div class="container">
+        <h1>💕 亲爱的宝贝，节日快乐 💕</h1>
+
+        <!-- 照片墙 -->
+        <div class="photo-gallery">
+            <div class="photo-item" onclick="showPhotoMsg(1)"><span class="placeholder">👩‍🎓</span></div>
+            <div class="photo-item" onclick="showPhotoMsg(2)"><span class="placeholder">💑</span></div>
+            <div class="photo-item" onclick="showPhotoMsg(3)"><span class="placeholder">🌹</span></div>
+            <div class="photo-item" onclick="showPhotoMsg(4)"><span class="placeholder">💕</span></div>
+            <div class="photo-item" onclick="showPhotoMsg(5)"><span class="placeholder">🎓</span></div>
+            <div class="photo-item" onclick="showPhotoMsg(6)"><span class="placeholder">💖</span></div>
+        </div>
+
+        <div class="heart-container" onclick="clickHeart()">
+            ❤️
+            <p style="font-size: 16px; margin-top: 10px; color: #e91e63;">点我呀～</p>
+        </div>
+
+        <!-- 打字机效果祝福 -->
+        <div class="typewriter">
+            <div class="typewriter-text" id="typewriterText"></div>
+            <span class="cursor"></span>
+        </div>
+
+        <!-- 倒计时 -->
+        <div class="countdown">
+            <div class="countdown-title">我们已经相爱</div>
+            <div class="countdown-numbers" id="loveDays">0</div>
+            <div>天啦！💑</div>
+        </div>
+
+        <!-- 时光轴 -->
+        <div class="timeline">
+            <h3 style="color: #e91e63; text-align: center; margin-bottom: 20px;">💕 我们的美好时光 💕</h3>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">📅 初见那天</div>
+                    <div class="timeline-text">第一眼看到你，就知道你是我命中注定的人</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">📅 在一起</div>
+                    <div class="timeline-text">终于牵到你的手，从此心里住进了一个人</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">📅 每一个今天</div>
+                    <div class="timeline-text">虽然异地，但爱让我们的心紧紧相连</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">📅 未来</div>
+                    <div class="timeline-text">想和你一起走过每一个春夏秋冬</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 按钮组 -->
+        <div class="btn-group">
+            <button class="btn" onclick="showSurprise()"><span>🎁 惊喜祝福</span></button>
+            <button class="btn" onclick="sendHearts()"><span>💖 发送爱心</span></button>
+            <button class="btn" onclick="launchFireworks()"><span>🎆 烟花绽放</span></button>
+        </div>
+
+        <!-- 留言板 -->
+        <div class="message-board">
+            <h3>💌 给宝贝的留言板</h3>
+            <textarea class="message-input" id="messageInput" placeholder="写下你想对她说的话..."></textarea>
+            <button class="btn" onclick="addMessage()"><span>💝 写下祝福</span></button>
+            <div class="messages-list" id="messagesList">
+                <div class="message-item">
+                    <div class="time">💕 永远爱你</div>
+                    <div>你是我最珍贵的宝贝，女神节快乐！</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>💝 专属我的女神 - 2026 年 3 月 8 日 💝</p>
+            <p>🌟 愿我们的爱情，如星辰大海，永恒璀璨 🌟</p>
+        </footer>
+    </div>
+
+    <script>
+        // 打字机效果
+        const typewriterText = `亲爱的，
+
+今天是 3.8 女神节，虽然我们不能在一起过节，但我的心一直和你在一起。
+
+作为大学生，你每天都在为梦想努力，我为你感到骄傲！你的认真、你的坚持、你的笑容，都是我生活中最美好的风景。
+
+异地恋很辛苦，但有你很值得。距离阻挡不了我的思念，更阻挡不了我对你的爱。
+
+愿我的宝贝：
+✨ 学业进步，天天开心
+✨ 青春美丽，笑口常开
+✨ 万事顺意，梦想成真
+
+记住，无论何时，都有一个人在远方深深地爱着你、支持着你。
+
+我爱你，永远永远！💕`;
+
+        let charIndex = 0;
+        function typeWriter() {
+            if (charIndex < typewriterText.length) {
+                const text = typewriterText.charAt(charIndex);
+                document.getElementById('typewriterText').textContent += text;
+                charIndex++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+
+        // 创建漂浮爱心
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['❤️', '💕', '💖', '💗', '💓', '💞', '💘', '💝'];
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 3 + 's';
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    container.appendChild(heart);
+                }, i * 300);
+            }
+        }
+
+        // 点击爱心
+        function clickHeart() {
+            const messages = [
+                '💕 爱你哟～',
+                '😘 么么哒',
+                '💖 我的心跳只为你',
+                '🌹 你是我最爱的人',
+                '💝 永远爱你'
+            ];
+            alert(messages[Math.floor(Math.random() * messages.length)]);
+            sendHearts();
+        }
+
+        // 照片消息
+        function showPhotoMsg(index) {
+            const msgs = [
+                '📸 这是我最可爱的宝贝！',
+                '💑 好想现在就见到你',
+                '🌹 送你一朵玫瑰花',
+                '💕 满满的都是爱',
+                '🎓 为努力的学霸点赞',
+                '💖 你是我最珍贵的宝藏'
+            ];
+            alert(msgs[index - 1] || '💕 爱你！');
+        }
+
+        // 显示惊喜
+        function showSurprise() {
+            const messages = [
+                '🌹 送你一朵玫瑰花，愿你人比花娇！',
+                '💐 你是世界上最美的女神！',
+                '🎀 今天你最大，你说什么都对！',
+                '💝 我的心只属于你一个人！',
+                '👑 你永远是我心中的女王！',
+                '🌟 遇见你，是我最大的幸运！',
+                '💕 余生请多指教，我的宝贝！'
+            ];
+            
+            alert(messages[Math.floor(Math.random() * messages.length)] + '\n\n记得要开心哦～😘');
+            launchFireworks();
+        }
+
+        // 发送爱心
+        function sendHearts() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = '💖';
+                    heart.style.left = (Math.random() * 100) + '%';
+                    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                    heart.style.animationDuration = '4s';
+                    document.getElementById('floatingHearts').appendChild(heart);
+                    setTimeout(() => heart.remove(), 4000);
+                }, i * 100);
+            }
+        }
+
+        // 计算相爱天数
+        function calculateLoveDays() {
+            // 修改这里的日期为你们在一起的日期
+            const startDate = new Date('2024-01-01');
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('loveDays').textContent = diffDays;
+        }
+
+        // 留言板功能
+        function addMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (message) {
+                const list = document.getElementById('messagesList');
+                const item = document.createElement('div');
+                item.className = 'message-item';
+                const now = new Date();
+                const timeStr = now.toLocaleString('zh-CN');
+                item.innerHTML = `<div class="time">📅 ${timeStr}</div><div>${message}</div>`;
+                list.insertBefore(item, list.firstChild);
+                input.value = '';
+                sendHearts();
+            }
+        }
+
+        // 烟花效果
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+
+        function createParticle(x, y) {
+            const particleCount = 30;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: (Math.random() - 0.5) * 10,
+                    vy: (Math.random() - 0.5) * 10,
+                    life: 100,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                    size: Math.random() * 5 + 2
+                });
+            }
+        }
+
+        function updateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.2;
+                p.life--;
+                p.size *= 0.97;
+
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (p.life <= 0 || p.size < 0.5) {
+                    particles.splice(i, 1);
+                }
+            }
+            requestAnimationFrame(updateParticles);
+        }
+
+        function launchFireworks() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createParticle(
+                        Math.random() * canvas.width,
+                        Math.random() * canvas.height / 2
+                    );
+                }, i * 300);
+            }
+        }
+
+        // 音乐控制（可选）
+        let isMusicPlaying = false;
+        function toggleMusic() {
+            const btn = document.getElementById('musicBtn');
+            isMusicPlaying = !isMusicPlaying;
+            if (isMusicPlaying) {
+                btn.textContent = '⏸️';
+                btn.classList.remove('paused');
+                // 可以在这里添加实际的音乐播放
+                alert('🎵 音乐播放功能\n\n建议：你可以添加一首她喜欢的歌作为背景音乐哦～');
+            } else {
+                btn.textContent = '🎵';
+                btn.classList.add('paused');
+            }
+        }
+
+        // 页面加载
+        window.onload = function() {
+            createFloatingHearts();
+            calculateLoveDays();
+            typeWriter();
+            updateParticles();
+            
+            // 窗口大小改变时调整画布
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        };
+    </script>
+</body>
+</html>
